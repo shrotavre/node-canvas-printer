@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HTML5 canvas star shape</title>
+  <script>
+    function drawStar(R, cX, cY, N) {
+      const canvas = document.getElementById('canvas-content');
+
+      var ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = 'orange';
+
+      //star draw
+      ctx.beginPath();
+      ctx.moveTo(cX + R, cY);
+
+      for (var i = 1; i <= N * 2; i++) {
+        if (i % 2 == 0) {
+          var theta = i * (Math.PI * 2) / (N * 2);
+          var x = cX + (R * Math.cos(theta));
+          var y = cY + (R * Math.sin(theta));
+        } else {
+          var theta = i * (Math.PI * 2) / (N * 2);
+          var x = cX + ((R / 2) * Math.cos(theta));
+          var y = cY + ((R / 2) * Math.sin(theta));
+        }
+
+        ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fill();
+    }
+  </script>
+</head>
+
+<body onload="drawStar(200, 200, 200, 5);">
+  <canvas id="canvas-content" width="400" height="400">
+  </canvas>
+</body>
+
+</html>
