@@ -15,7 +15,10 @@ const Painter = async (canvasName) => {
   await page.setContent(canvasCode);
 
   const contentElement = await page.$('#canvas-content');
-  await contentElement.screenshot({ path: `results/${Date.now()}.png` });
+  await contentElement.screenshot({
+    path: `results/${Date.now()}.png`,
+    omitBackground: true,
+  });
 
   await browser.close();
 }
