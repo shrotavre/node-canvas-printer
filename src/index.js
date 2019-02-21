@@ -6,5 +6,7 @@ import Painter from './painter'
 (async () => {
   console.log(`${name} (version ${version}) is running.`)
 
-  await Painter('star')
+  console.log(`Painting..`)
+  await Painter('star', { hands: 8, size: 500 })
+  console.log(`Finished!`)
 })();

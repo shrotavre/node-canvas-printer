@@ -4,14 +4,17 @@
 <head>
   <title>HTML5 canvas star shape</title>
   <script>
-    function drawStar(R, cX, cY, N) {
-      const canvas = document.getElementById('canvas-content');
-
+    function drawStar(canvas, params) {
       var ctx = canvas.getContext('2d');
+
+      const R = params.radius
+      const cX = params.centerX
+      const cY = params.centerY
+      const N = params.handsCount
 
       ctx.fillStyle = 'orange';
 
-      //star draw
+      //draw star
       ctx.beginPath();
       ctx.moveTo(cX + R, cY);
 
@@ -31,10 +34,31 @@
       ctx.closePath();
       ctx.fill();
     }
+
+    // main function
+    function drawCanvas() {
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // parse input
+      const starSize = parseInt(urlParams.get('size')) || 200;
+      const starHands = parseInt(urlParams.get('hands')) || 5;
+
+      const canvas = document.getElementById('canvas-content');
+
+      canvas.width = starSize * 2;
+      canvas.height = starSize * 2;
+
+      drawStar(canvas, {
+        radius: starSize,
+        centerX: starSize,
+        centerY: starSize,
+        handsCount: starHands
+      })
+    }
   </script>
 </head>
 
-<body onload="drawStar(200, 200, 200, 5);">
+<body onload="drawCanvas();">
   <canvas id="canvas-content" width="400" height="400">
   </canvas>
 </body>

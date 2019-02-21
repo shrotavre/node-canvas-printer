@@ -1,21 +1,22 @@
-import fs from 'fs'
 import path from 'path'
 import puppeteer from 'puppeteer'
 
-const fetchCanvas = (canvasName) => {
-  const canvasPath = path.resolve('./canvases/', `${canvasName}.html`)
-  return fs.readFileSync(canvasPath, 'utf8');
-}
+// helpers
+const buildQueryParams = (params) => Object.entries(params).map(([k, v]) => `${k}=${v}`).join('&')
+const buildCanvasPath = (canvasName) => path.resolve('./canvases/', `${canvasName}.html`)
 
-const Painter = async (canvasName) => {
+// main
+const Painter = async (canvasName, canvasParams = {}) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const canvasCode = fetchCanvas(canvasName)
 
-  await page.setContent(canvasCode);
+  const canvasPath = buildCanvasPath(canvasName)
+  const queryParams = buildQueryParams(canvasParams)
 
-  const contentElement = await page.$('#canvas-content');
-  await contentElement.screenshot({
+  await page.goto(`file://${canvasPath}?${queryParams}`);
+
+  const canvasContent = await page.$('#canvas-content');
+  await canvasContent.screenshot({
     path: `results/${Date.now()}.png`,
     omitBackground: true,
   });
