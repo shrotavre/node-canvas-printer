@@ -1,7 +1,7 @@
 {
-  "name": "shapes-printer",
+  "name": "canvas-printer",
   "version": "1.0.0",
-  "description": "Experiment to render image from locally-run web page",
+  "description": "Experiment to render image from locally-run web page containing canvas",
   "main": "dist/index.js",
   "scripts": {
     "dev": "npx nodemon --exec 'npx babel-node src' --watch src",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shrotavre/haf2019be.git"
+    "url": "git+https://github.com/shrotavre/canvas-printer.git"
   },
   "author": "Avre Barra <avreghly@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shrotavre/haf2019be/issues"
+    "url": "https://github.com/shrotavre/canvas-printer/issues"
   },
-  "homepage": "https://github.com/shrotavre/haf2019be#readme",
+  "homepage": "https://github.com/shrotavre/canvas-printer#readme",
   "dependencies": {
     "dotenv": "^6.2.0",
     "puppeteer": "^1.12.2"
